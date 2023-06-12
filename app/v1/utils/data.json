@@ -1,0 +1,27 @@
+{
+    "mensaje_bienvenida": "Bienvenido a la API de Paises",
+    "endpoints": [
+        {
+            "ruta": "/paises",
+            "descripcion": "Para ver los paises disponibles"
+        },
+        {
+            "ruta": "/pais/{id}",
+            "descripcion": "Para ver los detalles de un pais",
+            "ejemplo": "/pais/1234"
+        },
+        {
+            "ruta": "/busqueda/{nombre}",
+            "descripcion": "Para buscar un pais por Nombre, Capital o Continente",
+            "ejemplo": "/busqueda/Argentina"
+        },
+        {
+            "ruta": "/docs",
+            "descripcion": "Para ver la documentacion"
+        },
+        {
+            "ruta": "/redoc",
+            "descripcion": "Para ver la documentacion"
+        }
+    ]
+}
