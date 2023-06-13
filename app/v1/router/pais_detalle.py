@@ -1,14 +1,15 @@
+import sys
 from fastapi import Depends, APIRouter, HTTPException
-from fastapi.encoders import jsonable_encoder
-from sqlalchemy.orm import Session, joinedload
 
-from v1.utils.db import Base, engine, get_db, SessionLocal
+from sqlalchemy.orm import Session
 
+sys.path.append(".")
 
-from v1.model.models import *
-from v1.schema.schemas import PaisDetalle
+from app.v1.utils.db import Base, engine, get_db, SessionLocal
+from app.v1.model.models import *
+from app.v1.schema.schemas import PaisDetalle
 
-router = APIRouter(prefix="/paises/{}", tags=["pais"])
+router = APIRouter(prefix="/api/v1/paises/{}", tags=["pais"])
 
 
 @router.get("/", response_model=PaisDetalle)

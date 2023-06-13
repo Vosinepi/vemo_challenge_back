@@ -4,7 +4,8 @@ import sys
 
 sys.path.append(".")
 
-from app.v1.utils import db
+from app.v1.utils.db import engine
+from app.v1.model.models import Base
 
 # from utils.db import Base, engine
 from app.v1.model import models
@@ -12,16 +13,15 @@ from app.v1.model import models
 
 # creo las tablas
 def create_table():
-    db.Base.metadata.create_all(db.engine)
-
-    inspector = inspect(db.engine)
+    inspector = inspect(engine)
     tablas_creadas = inspector.get_table_names()
 
     if tablas_creadas:
-        print("Tablas creadas\n")
-
+        inspector = inspect(engine)
+        tablas_creadas = inspector.get_table_names()
+        print("Tablas ya creadas creadas")
+    elif not tablas_creadas:
+        Base.metadata.create_all(engine)
+        print("Tablas creadas")
     else:
         print("Tablas no creadas")
-
-
-create_table()

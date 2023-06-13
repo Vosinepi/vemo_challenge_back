@@ -6,11 +6,10 @@ import sys
 
 sys.path.append(".")
 
-# from settings import Settings
 
-from app.v1.utils import settings as st
+from app.v1.utils.settings import Settings
 
-settings = st.Settings()
+settings = Settings()
 
 DB_NAME = settings.db_name
 DB_USER = settings.db_user
@@ -36,6 +35,9 @@ Base = declarative_base()
 
 
 def get_db():
+    """
+    Esta función devuelve una sesión de base de datos y la cierra después de su uso.
+    """
     db = SessionLocal()
     try:
         yield db

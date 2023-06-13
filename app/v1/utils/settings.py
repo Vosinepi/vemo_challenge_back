@@ -17,3 +17,15 @@ class Settings(BaseSettings):
         super().__init__(**kwargs)
         if self.db_name is None:
             raise ValueError("DB_NAME is not set")
+
+
+class EmailSettings(BaseSettings):
+    email_user: str = os.getenv("EMAIL_HOST_USER", "")
+    email_password: str = os.getenv("EMAIL_HOST_PASSWORD", "")
+    email_host: str = os.getenv("EMAIL_HOST", "")
+    email_port: str = os.getenv("EMAIL_PORT", "")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.email_user is None:
+            raise ValueError("EMAIL_USER is not set")

@@ -4,3 +4,6 @@ SQLAlchemy
 requests
 psycopg2
 python-dotenv
+pandas
+openpyxl
+secure-smtplib

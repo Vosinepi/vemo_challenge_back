@@ -1,16 +1,21 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Table, MetaData
 from sqlalchemy.orm import relationship
+
 import sys
 
 sys.path.append(".")
 
-from app.v1.utils.db import Base
+
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 metadata = MetaData()
 
 
 class Pais(Base):
     __tablename__ = "pais"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, unique=True, index=True)
@@ -28,6 +33,7 @@ class Pais(Base):
 
 class Continente(Base):
     __tablename__ = "continente"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, unique=True, index=True)
@@ -35,6 +41,7 @@ class Continente(Base):
 
 class Idioma(Base):
     __tablename__ = "idioma"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, unique=True, index=True)
@@ -42,13 +49,16 @@ class Idioma(Base):
 
 class Actividad(Base):
     __tablename__ = "actividad"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, unique=True, index=True)
+    descripcion = Column(String, nullable=False)
 
 
 class PaisContinente(Base):
     __tablename__ = "pais_continente"
+    __table_args__ = {"extend_existing": True}
 
     id_pais = Column(Integer, ForeignKey("pais.id"), primary_key=True)
     id_continente = Column(Integer, ForeignKey("continente.id"), primary_key=True)
@@ -56,6 +66,7 @@ class PaisContinente(Base):
 
 class PaisIdioma(Base):
     __tablename__ = "pais_idioma"
+    __table_args__ = {"extend_existing": True}
 
     id_pais = Column(Integer, ForeignKey("pais.id"), primary_key=True)
     id_idioma = Column(Integer, ForeignKey("idioma.id"), primary_key=True)
@@ -63,21 +74,7 @@ class PaisIdioma(Base):
 
 class PaisActividad(Base):
     __tablename__ = "pais_actividad"
+    __table_args__ = {"extend_existing": True}
 
     id_pais = Column(Integer, ForeignKey("pais.id"), primary_key=True)
     id_actividad = Column(Integer, ForeignKey("actividad.id"), primary_key=True)
-
-
-# agrego extend_existing=True para que no me de error de que ya existe la tabla
-
-pais_tabla = Table(
-    "pais",
-    metadata,
-    Column("id", Integer, primary_key=True, index=True),
-    Column("nombre", String, unique=True, index=True),
-    Column("capital", String),
-    Column("moneda", String),
-    Column("poblacion", Integer),
-    Column("bandera", String, unique=True, index=True),
-    extend_existing=True,
-)

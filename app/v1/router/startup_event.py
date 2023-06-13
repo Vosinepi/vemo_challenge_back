@@ -9,10 +9,11 @@ from v1.utils.db import Base, engine, get_db, SessionLocal
 sys.path.append(".")
 
 from v1.scripts.create_table import create_table
-from v1.scripts.cargar_datos import cargar_datos
+from app.v1.scripts.carga_paises import cargar_datos
 
 from v1.model.models import *
 from v1.schema.schemas import PaisLista
+
 
 router = APIRouter(tags=["Crear_Cargar"])
 

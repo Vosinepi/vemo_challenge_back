@@ -16,6 +16,15 @@
             "ejemplo": "/busqueda/Argentina"
         },
         {
+            "ruta": "/exportar/?correo=",
+            "descripcion": "Para exportar los datos de los paises a un archivo CSV y enviarlo por correo",
+            "ejemplo": "/exportar/?correo=vemo%40vemo.com.ar"
+        },
+        {
+            "ruta": "/descarga",
+            "descripcion": "Descargar el archivo excel con los datos de los paises"
+        },
+        {
             "ruta": "/docs",
             "descripcion": "Para ver la documentacion"
         },
