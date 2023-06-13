@@ -12,7 +12,7 @@ from app.v1.schema.schemas import PaisLista
 router = APIRouter(prefix="/api/v1/paises/busquedas", tags=["buscar"])
 
 
-@router.post("/", response_model=PaisLista)
+@router.get("/", response_model=PaisLista)
 def buscar_paises(
     pais: str = None,
     capital: str = None,

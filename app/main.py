@@ -11,7 +11,7 @@ from v1.router.startup_event import router as startup_event
 from v1.router.enviar_excel import router as enviar_excel
 from v1.router.descarga import router as descarga
 
-app = FastAPI(title="API Paise", version=0.1, root_path="/")
+app = FastAPI(title="API Paises", version=0.1, root_path="/")
 
 
 @app.get("/api/v1")
@@ -24,7 +24,7 @@ def root():
 # Routers
 app.include_router(
     startup_event
-)  # Este router se ejecuta al iniciar el servidor crea tabla y carga datos
+)  # Este router se ejecuta al iniciar el servidor crea tabla y carga datos y deja una tarea programada para actualizar los datos y enviar correo
 app.include_router(paises)  # Listado de paises
 app.include_router(pais_detalle)  # Detalle de un pais
 app.include_router(busqueda)  # Busqueda de paises por nombre

@@ -1,5 +1,5 @@
 import sys
-from fastapi import Depends, APIRouter, BackgroundTasks
+from fastapi import Depends, APIRouter
 from sqlalchemy.orm import Session
 
 sys.path.append(".")
@@ -11,21 +11,12 @@ from app.v1.scripts.enviar_email import enviar_correo
 
 router = APIRouter(prefix="/api/v1/exportar", tags=["exportar"])
 
-"""
-usar background tasks para esto
-"""
 
-
-# def generar_y_enviar_excel(paises, correo):
-#     archivo = generar_excel(paises)
-#     enviar_correo(archivo, correo)
-
-
-@router.post("/")
+@router.get("/")
 def exportar(correo: str = None, db: Session = Depends(get_db)):
     paises = db.query(Pais).order_by(Pais.nombre).all()
 
-    archivo = generar_excel(paises)
-    enviar_correo(archivo, correo)
+    archivo = generar_excel(paises)  # Genera el excel
+    enviar_correo(archivo, correo)  # Envia el correo
 
     return {"mensaje": "Correo enviado"}

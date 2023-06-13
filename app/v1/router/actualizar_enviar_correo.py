@@ -1,0 +1,15 @@
+import sys
+from fastapi import APIRouter
+
+sys.path.append(".")
+
+from app.v1.scripts.eschedule_mail_ddbb import programacion_tarea
+
+router = APIRouter(prefix="/api/v1/ddbb_update", tags=["ddbb_mail"])
+
+
+@router.get("/")
+def actualizacion():
+    programacion_tarea()
+
+    return {"mensaje": "Actualizacion diario en funcionamiento"}
