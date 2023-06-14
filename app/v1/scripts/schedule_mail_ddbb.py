@@ -2,6 +2,7 @@ import sys
 from apscheduler.schedulers.background import BackgroundScheduler
 import logging
 
+
 sys.path.append(".")
 
 from app.v1.utils.db import SessionLocal
