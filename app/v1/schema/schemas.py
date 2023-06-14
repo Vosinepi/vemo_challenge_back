@@ -28,12 +28,19 @@ class PaisBase(BaseModel):
         orm_mode = True
 
 
+class PaisId(PaisBase):
+    id_pais: int
+
+    class Config:
+        orm_mode = True
+
+
 class PaisLista(BaseModel):
     paises: List[PaisBase]
 
 
 class PaisDetalle(BaseModel):
-    pais: List[PaisBase]
+    pais: List[PaisId]
 
 
 class ActividadCreate(ActividadBase):
