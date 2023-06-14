@@ -15,8 +15,9 @@ router = APIRouter(prefix="/api/v1/schedulerstop", tags=["scheduler stop"])
 
 @router.get("/")
 def stop_scheduler():
-    if scheduler and scheduler.running:
+    if scheduler.running == True:
         scheduler.stop()
         return {"message": "Se detuvo Scheduler"}
     else:
+        scheduler.stop()
         return {"message": "Scheduler no se encuentra iniciado"}

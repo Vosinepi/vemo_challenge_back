@@ -16,7 +16,7 @@ router = APIRouter(prefix="/api/v1/schedulerstart", tags=["scheduler start"])
 @router.get("/")
 def start_scheduler(segundos: int = 86400):
     scheduler.start(segundos)
-    if not scheduler:
+    if not scheduler.running:
         return {"message": "Se inicio Scheduler"}
     else:
         return {"message": "Scheduler ya se encuentra iniciado"}
