@@ -21,4 +21,4 @@ async def startup_event():
     cargar_datos()
 
     # tarea de actualizacion diaria de datos y envio de mail
-    scheduler.start(86300)
+    scheduler.start()

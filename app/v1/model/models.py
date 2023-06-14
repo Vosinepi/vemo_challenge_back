@@ -54,6 +54,8 @@ class Actividad(Base):
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, unique=True, index=True)
     descripcion = Column(String, nullable=False)
+    # paises enlaca a la tabla de paises
+    paises = relationship("Pais", secondary="pais_actividad")
 
 
 class PaisContinente(Base):

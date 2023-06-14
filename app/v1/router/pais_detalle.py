@@ -9,17 +9,24 @@ from app.v1.utils.db import Base, engine, get_db, SessionLocal
 from app.v1.model.models import *
 from app.v1.schema.schemas import PaisDetalle
 
-router = APIRouter(prefix="/api/v1/paises/{id_pais}", tags=["pais"])
+router = APIRouter(prefix="/api/v1/pais", tags=["pais"])
 
 
-@router.get("/", response_model=PaisDetalle)
+@router.get("/{id_pais}/", response_model=PaisDetalle)
 def get_pais(id_pais: int, db: Session = Depends(get_db)):
     pais = db.query(Pais).filter(Pais.id == id_pais).first()
 
     if not pais:
         raise HTTPException(status_code=404, detail="País no encontrado")
 
-    actividades_dict = [{"nombre": actividad.nombre} for actividad in pais.actividades]
+    actividades_dict = [
+        {
+            "nombre": actividad.nombre,
+            "descripcion": actividad.descripcion,
+            "paises_con_actividad": [pais.nombre for pais in actividad.paises],
+        }
+        for actividad in pais.actividades
+    ]
     idiomas_dict = [{"nombre": idioma.nombre} for idioma in pais.idiomas]
     continente_dict = [{"nombre": continente.nombre} for continente in pais.continente]
 

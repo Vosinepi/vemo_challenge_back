@@ -19,28 +19,6 @@ def buscar_paises(
     continente: str = None,
     db: Session = Depends(get_db),
 ):
-    """
-    Esta función busca países en función de los parámetros de entrada y devuelve una lista de países con
-    su información respectiva.
-
-    :param pais: Un parámetro de cadena utilizado para filtrar países por nombre
-    :type pais: str
-    :param capital: La capital de un país
-    :type capital: str
-    :param continente: El parámetro "continente" es una cadena que representa el nombre de un
-    continente. Se utiliza como filtro para buscar países que pertenecen a ese continente
-    :type continente: str
-    :param db: db es una dependencia que proporciona una sesión de base de datos a la función. Se
-    obtiene mediante la función get_db, que es una dependencia que crea una nueva sesión de base de
-    datos para cada solicitud y la cierra cuando finaliza la solicitud. La sesión se utiliza para
-    consultar la base de datos en busca de la información solicitada
-    :type db: Session
-    :return: Un diccionario con clave "paises" que contiene una lista de diccionarios, donde cada
-    diccionario representa un país y su información (como id, capital, moneda, bandera, nombre,
-    poblacion, actividades, continente e idiomas). Los datos devueltos se validan con el modelo
-    PaisLista.
-    """
-
     query = (
         db.query(Pais)
         .join(PaisContinente)
@@ -62,7 +40,12 @@ def buscar_paises(
     paises = []
     for pais in query:
         actividades_dict = [
-            {"id": actividad.id, "nombre": actividad.nombre}
+            {
+                "id": actividad.id,
+                "nombre": actividad.nombre,
+                "descripcion": actividad.descripcion,
+                "paises_con_actividad": [pais.nombre for pais in actividad.paises],
+            }
             for actividad in pais.actividades
         ]
         idiomas_dict = [

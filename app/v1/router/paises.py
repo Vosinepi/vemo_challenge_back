@@ -26,7 +26,12 @@ def get_paises(db: Session = Depends(get_db)):
     paises = []
     for pais in query:
         actividades_dict = [
-            {"id": actividad.id, "nombre": actividad.nombre}
+            {
+                "id": actividad.id,
+                "nombre": actividad.nombre,
+                "descripcion": actividad.descripcion,
+                "paises_con_actividad": [pais.nombre for pais in actividad.paises],
+            }
             for actividad in pais.actividades
         ]
         idiomas_dict = [

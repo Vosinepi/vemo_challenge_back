@@ -12,6 +12,11 @@ class ContinenteBase(BaseModel):
 
 class ActividadBase(BaseModel):
     nombre: str
+    descripcion: str
+    paises_con_actividad: List[str]
+
+    class Config:
+        orm_mode = True
 
 
 class PaisBase(BaseModel):
@@ -22,7 +27,7 @@ class PaisBase(BaseModel):
     bandera: str
     continente: List[ContinenteBase]
     idiomas: List[IdiomaBase]
-    actividades: Optional[List[ActividadBase]]
+    actividades: Optional[List[ActividadBase]] = None
 
     class Config:
         orm_mode = True
@@ -31,28 +36,14 @@ class PaisBase(BaseModel):
 class PaisId(PaisBase):
     id: int
 
-    class Config:
-        orm_mode = True
-
 
 class PaisLista(BaseModel):
     paises: List[PaisBase]
 
 
 class PaisDetalle(BaseModel):
-    pais: List[PaisId]
+    pais: List[PaisBase]
 
 
 class ActividadCreate(ActividadBase):
     pass
-
-
-class ActividadUpdate(ActividadBase):
-    pass
-
-
-class Actividad(ActividadBase):
-    id: int
-
-    class Config:
-        orm_mode = True
