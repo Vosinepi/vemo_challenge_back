@@ -29,7 +29,7 @@ class PaisBase(BaseModel):
 
 
 class PaisId(PaisBase):
-    id_pais: int
+    id: int
 
     class Config:
         orm_mode = True

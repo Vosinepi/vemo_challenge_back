@@ -9,12 +9,12 @@ from app.v1.utils.db import Base, engine, get_db, SessionLocal
 from app.v1.model.models import *
 from app.v1.schema.schemas import PaisDetalle
 
-router = APIRouter(prefix="/api/v1/paises/{}", tags=["pais"])
+router = APIRouter(prefix="/api/v1/paises/{id_pais}", tags=["pais"])
 
 
 @router.get("/", response_model=PaisDetalle)
-def get_pais(pais_id: int, db: Session = Depends(get_db)):
-    pais = db.query(Pais).filter(Pais.id == pais_id).first()
+def get_pais(id_pais: int, db: Session = Depends(get_db)):
+    pais = db.query(Pais).filter(Pais.id == id_pais).first()
 
     if not pais:
         raise HTTPException(status_code=404, detail="País no encontrado")
