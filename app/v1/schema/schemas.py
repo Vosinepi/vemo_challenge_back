@@ -12,8 +12,8 @@ class ContinenteBase(BaseModel):
 
 class ActividadBase(BaseModel):
     nombre: str
-    descripcion: str
-    paises_con_actividad: List[str]
+    descripcion: Optional[str] = "Sin descripcion"
+    paises_con_actividad: Optional[List[str]] = None
 
     class Config:
         orm_mode = True
@@ -47,3 +47,14 @@ class PaisDetalle(BaseModel):
 
 class ActividadCreate(ActividadBase):
     pass
+
+
+class ActividadUpdate(ActividadBase):
+    pass
+
+
+class ActividadView(ActividadBase):
+    id: int
+
+    class Config:
+        orm_mode = True

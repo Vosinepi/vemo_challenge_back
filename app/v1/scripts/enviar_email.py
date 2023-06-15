@@ -5,10 +5,17 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email import encoders
+import logging
 
 sys.path.append(".")
 
+from app.v1.utils.logger import handler
 from app.v1.utils.settings import EmailSettings
+
+# Configuro el logging
+logger = logging.getLogger("Envio de mail")
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
 
 settings = EmailSettings()
 
@@ -41,3 +48,5 @@ def enviar_correo(archivo, destinatario):
 
     server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
     server.send_message(msg)
+
+    logger.info(f"Correo enviado a {destinatario}")

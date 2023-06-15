@@ -9,7 +9,7 @@ from app.v1.model.models import Pais
 from app.v1.scripts.crear_excel import generar_excel
 from app.v1.scripts.enviar_email import enviar_correo
 
-router = APIRouter(prefix="/api/v1/exportar", tags=["exportar"])
+router = APIRouter(prefix="/api/v1/exportar", tags=["utilidades"])
 
 
 @router.get("/")

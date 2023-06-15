@@ -5,7 +5,9 @@ import logging
 
 sys.path.append(".")
 
+
 from app.v1.utils.db import SessionLocal
+from app.v1.utils.logger import handler
 from app.v1.model.models import Pais
 from app.v1.scripts.crear_excel import generar_excel
 from app.v1.scripts.enviar_email import enviar_correo
@@ -22,13 +24,6 @@ class ScheduleMailDdbb:
         self.running = False
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
-
-        # Configuro el logging
-        handler = logging.FileHandler("app/v1/logs/schedule_mail_ddbb.log")
-        formatter = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-        )
-        handler.setFormatter(formatter)
         self.logger.addHandler(handler)
 
     def actualizar_enviar_correo(self):

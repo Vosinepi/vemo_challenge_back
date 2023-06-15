@@ -1,10 +1,12 @@
 import requests
-
 import sys
+import logging
 
 sys.path.append(".")
 
+
 from app.v1.utils.db import SessionLocal
+from app.v1.utils.logger import handler
 from app.v1.model.models import (
     Pais,
     Continente,
@@ -13,8 +15,14 @@ from app.v1.model.models import (
     PaisIdioma,
 )
 
+# Configuro el logging
+logger = logging.getLogger("Carga de datos")
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
+
 
 def cargar_datos():
+    # apí de consulta
     api = "https://restcountries.com/v3.1/all"
 
     # hacemos la petición
@@ -29,8 +37,6 @@ def cargar_datos():
 
     # creamos la sesión
     db = SessionLocal()
-
-    # cargamos los datos
 
     # cargamos los paises
     for pais_data in data:
@@ -133,6 +139,7 @@ def cargar_datos():
 
     db.commit()
     db.close()
+    logger.info("Datos cargados y actulizacdos")
 
 
 if __name__ == "__main__":

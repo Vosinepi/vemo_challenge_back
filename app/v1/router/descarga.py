@@ -13,7 +13,7 @@ from app.v1.model.models import Pais
 from app.v1.scripts.crear_excel import generar_excel
 
 
-router = APIRouter(prefix="/api/v1/descargas", tags=["descarga"])
+router = APIRouter(prefix="/api/v1/descargas", tags=["utilidades"])
 
 
 @router.get("/")

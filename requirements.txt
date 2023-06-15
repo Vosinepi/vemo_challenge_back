@@ -9,3 +9,5 @@ openpyxl
 secure-smtplib
 apscheduler
 logging
+fastapi-cache2[memcache]
+cahetools

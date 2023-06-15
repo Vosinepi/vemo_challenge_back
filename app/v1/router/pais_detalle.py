@@ -1,20 +1,24 @@
 import sys
 from fastapi import Depends, APIRouter, HTTPException
-
 from sqlalchemy.orm import Session
 
+# Decorador para cachear la respuesta de la función
+from fastapi_cache.decorator import cache
+
 sys.path.append(".")
+
 
 from app.v1.utils.db import Base, engine, get_db, SessionLocal
 from app.v1.model.models import *
 from app.v1.schema.schemas import PaisDetalle
 
-router = APIRouter(prefix="/api/v1/pais", tags=["pais"])
+router = APIRouter(prefix="/api/v1/paises/{id}", tags=["paises"])
 
 
-@router.get("/{id_pais}/", response_model=PaisDetalle)
-def get_pais(id_pais: int, db: Session = Depends(get_db)):
-    pais = db.query(Pais).filter(Pais.id == id_pais).first()
+@router.get("/", response_model=PaisDetalle)
+@cache(expire=3600)
+def get_pais(id: int, db: Session = Depends(get_db)):
+    pais = db.query(Pais).filter(Pais.id == id).first()
 
     if not pais:
         raise HTTPException(status_code=404, detail="País no encontrado")
