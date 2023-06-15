@@ -41,24 +41,32 @@ git clone
 python -m venv venv
 ```
 
-- correr Docker de SQL Server
+- correr Docker de Postgresql
+
+```
 
 Colocar el puerto 5432, yo utilize otro por que ya tenia ocupado ese.
 
 ```
-docker run -d --name paises_vemo -v my_db:/var/lib/postgresql/data_vemo -p 5000:5432  -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=vemo_pais postgres
+
+docker run -d --name paises_vemo -v my_db:/var/lib/postgresql/data_vemo -p 5000:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=vemo_pais postgres
+
 ```
 
 - test ddbb
 
 ```
+
 docker exec -it paises_vemo psql -p 5432 -h localhost -U postgres -W vemo_pais
+
 ```
 
 - Instalar las dependencias
 
 ```
+
 pip install -r requirements.txt
+
 ```
 
 - cargar las credenciales de la base de datos en el archivo `.env`
@@ -66,7 +74,9 @@ pip install -r requirements.txt
 - Correr el servidor FastAPI con Uvicorn. El servidor se ejecutará en el puerto 8000.
 
 ```
+
 main.py
+
 ```
 
 ## Endpoints
@@ -222,6 +232,8 @@ Se implemento un sistema de logging para controlar los eventos, inicio, fin, car
 - [Linkedin](https://www.linkedin.com/in/iber-ismael-piovani-8b35bbba/)
 - [Twitter](https://twitter.com/laimas)
 - [Github](https://github.com/Vosinepi)
+
+```
 
 ```
 
