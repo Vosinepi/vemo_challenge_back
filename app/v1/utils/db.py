@@ -1,16 +1,16 @@
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-import sys
-
 sys.path.append(".")
 
-
+# modulos propios
 from app.v1.utils.settings import Settings
 
 settings = Settings()
 
+# configuracion de la base de datos
 DB_NAME = settings.db_name
 DB_USER = settings.db_user
 DB_PASSWORD = settings.db_password

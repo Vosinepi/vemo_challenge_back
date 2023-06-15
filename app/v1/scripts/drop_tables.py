@@ -1,10 +1,9 @@
 from sqlalchemy import text
-
 import sys
-
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import SessionLocal
 
 

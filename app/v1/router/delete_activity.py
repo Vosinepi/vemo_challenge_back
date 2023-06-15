@@ -5,9 +5,10 @@ from sqlalchemy.orm import Session, joinedload
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import get_db
-from app.v1.model.models import Actividad, PaisActividad, Pais
-from app.v1.schema.schemas import ActividadCreate
+from app.v1.model.models import Actividad
+
 
 router = APIRouter(prefix="/api/v1/actividades/{id}", tags=["actividades"])
 
@@ -18,7 +19,6 @@ def delete_actividades(
     db: Session = Depends(get_db),
 ):
     # busco la actividad
-
     actividad = db.query(Actividad).filter_by(id=id).first()
     if actividad:
         db.delete(actividad)

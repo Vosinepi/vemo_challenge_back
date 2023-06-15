@@ -4,7 +4,7 @@ import logging
 
 sys.path.append(".")
 
-
+# modulos propios
 from app.v1.utils.db import SessionLocal
 from app.v1.utils.logger import handler
 from app.v1.model.models import (

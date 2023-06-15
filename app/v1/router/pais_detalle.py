@@ -7,7 +7,7 @@ from fastapi_cache.decorator import cache
 
 sys.path.append(".")
 
-
+# Modulos propios
 from app.v1.utils.db import Base, engine, get_db, SessionLocal
 from app.v1.model.models import *
 from app.v1.schema.schemas import PaisDetalle

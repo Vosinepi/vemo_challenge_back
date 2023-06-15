@@ -13,6 +13,7 @@ Base = declarative_base()
 metadata = MetaData()
 
 
+# modelos de la base de datos
 class Pais(Base):
     __tablename__ = "pais"
     __table_args__ = {"extend_existing": True}

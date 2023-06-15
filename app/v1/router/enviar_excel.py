@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Pais
 from app.v1.scripts.crear_excel import generar_excel

@@ -2,6 +2,9 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 
+# schemas para las vistas de la API
+
+
 class IdiomaBase(BaseModel):
     nombre: str
 

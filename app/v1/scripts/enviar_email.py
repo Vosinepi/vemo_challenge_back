@@ -1,14 +1,13 @@
 import sys
 from smtplib import SMTP_SSL
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from email import encoders
 import logging
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.logger import handler
 from app.v1.utils.settings import EmailSettings
 
@@ -19,18 +18,19 @@ logger.addHandler(handler)
 
 settings = EmailSettings()
 
-
+# Configuración del servidor de correo
 EMAIL_HOST = settings.email_host
 EMAIL_PORT = settings.email_port
 EMAIL_HOST_USER = settings.email_user
 EMAIL_HOST_PASSWORD = settings.email_password
 
-
+# Configuración del servidor de correo
 server = SMTP_SSL(EMAIL_HOST)
 
 
 def enviar_correo(archivo, destinatario):
     archivo.seek(0)
+
     # Crear mensaje de correo
     mensaje = "Adjunto encontrará el archivo con los paises del mundo"
     msg = MIMEMultipart()
@@ -45,8 +45,8 @@ def enviar_correo(archivo, destinatario):
     msg.attach(attachment)
 
     # Enviar correo electrónico
-
     server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
     server.send_message(msg)
+    server.quit()
 
     logger.info(f"Correo enviado a {destinatario}")

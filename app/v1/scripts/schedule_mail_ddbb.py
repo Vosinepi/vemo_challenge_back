@@ -5,7 +5,7 @@ import logging
 
 sys.path.append(".")
 
-
+# modulos propios
 from app.v1.utils.db import SessionLocal
 from app.v1.utils.logger import handler
 from app.v1.model.models import Pais
@@ -14,7 +14,7 @@ from app.v1.scripts.enviar_email import enviar_correo
 from app.v1.scripts.carga_paises import cargar_datos
 
 
-"""Esta clase que programa una tarea para actualizar datos, generar un archivo de Excel
+"""Esta clase programa una tarea para actualizar datos, generar un archivo de Excel
 y enviarlo por correo electrónico a un destinatario específico."""
 
 

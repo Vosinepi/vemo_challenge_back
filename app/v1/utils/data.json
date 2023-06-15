@@ -2,35 +2,54 @@
     "mensaje_bienvenida": "Bienvenido a la API de Paises",
     "endpoints": [
         {
-            "ruta": "/paises",
+            "ruta": "/api/v1/paises",
             "descripcion": "Para ver los paises disponibles"
         },
         {
-            "ruta": "/pais/{id}",
+            "ruta": "/api/v1/paises/{id}",
             "descripcion": "Para ver los detalles de un pais",
             "ejemplo": "/pais/1234"
         },
         {
-            "ruta": "/busqueda/{nombre}",
+            "ruta": "/api/v1/pais/",
             "descripcion": "Para buscar un pais por Nombre, Capital o Continente",
             "ejemplo": "/busqueda/Argentina"
         },
         {
-            "ruta": "/exportar/?correo=",
-            "descripcion": "Para exportar los datos de los paises a un archivo CSV y enviarlo por correo",
-            "ejemplo": "/exportar/?correo=vemo%40vemo.com.ar"
+            "ruta": "/api/v1/actividades",
+            "descripcion": "POST crear actividades"
         },
         {
-            "ruta": "/descarga",
-            "descripcion": "Descargar el archivo excel con los datos de los paises"
+            "ruta": "/api/v1/actividades/{id}",
+            "descripcion": "PUT actualizar actividades"
         },
         {
-            "ruta": "/docs",
-            "descripcion": "Para ver la documentacion"
+            "ruta": "/api/v1/actividades/{id}",
+            "descripcion": "DELETE actividades"
         },
         {
-            "ruta": "/redoc",
-            "descripcion": "Para ver la documentacion"
+            "ruta": "/api/v1/exportar/?correo=",
+            "descripcion": "Enviar email con paises"
+        },
+        {
+            "ruta": "/api/v1/actividades",
+            "descripcion": "GET Ver actividades"
+        },
+        {
+            "ruta": "/api/v1/descargas",
+            "descripcion": "descargar archivo excel con paises"
+        },
+        {
+            "ruta": "/api/v1/scheduler",
+            "descripcion": "Estado scheduler"
+        },
+        {
+            "ruta": "/api/v1/schedulerstart",
+            "descripcion": "activar scheduler"
+        },
+        {
+            "ruta": "/api/v1/schedulerstop",
+            "descripcion": "desactivar scheduler"
         }
     ]
 }

@@ -1,13 +1,11 @@
 from sqlalchemy import inspect, text
-
 import sys
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import engine
 from app.v1.model.models import Base
-
-# from utils.db import Base, engine
 from app.v1.model import models
 
 

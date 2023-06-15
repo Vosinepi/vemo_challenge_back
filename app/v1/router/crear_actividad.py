@@ -1,10 +1,11 @@
 import sys
 from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy import func
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Actividad, PaisActividad, Pais
 from app.v1.schema.schemas import ActividadCreate
@@ -17,8 +18,7 @@ def crear_actividades(
     actividad: ActividadCreate,
     db: Session = Depends(get_db),
 ):
-    # creo la actividad
-
+    # crear la actividad
     actividad_existe = db.query(Actividad).filter_by(nombre=actividad.nombre).first()
     if actividad_existe:
         raise HTTPException(
@@ -35,8 +35,7 @@ def crear_actividades(
         db.refresh(db_actividad)
 
     # creo la relacion entre paises y actividades
-
-    # obtengo los paises de la base de datos no importa si es mayuscula o minuscula
+    # obtengo los paises de la base de datos
     paises = (
         db.query(Pais)
         .filter(

@@ -1,15 +1,14 @@
 import sys
 from fastapi import Depends, APIRouter, Response
-from fastapi.responses import FileResponse
 from starlette.responses import StreamingResponse
 from io import BytesIO
 from sqlalchemy.orm import Session
 
 sys.path.append(".")
 
+# modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Pais
-
 from app.v1.scripts.crear_excel import generar_excel
 
 
@@ -17,7 +16,7 @@ router = APIRouter(prefix="/api/v1/descargas", tags=["utilidades"])
 
 
 @router.get("/")
-def exportar(response: Response, db: Session = Depends(get_db)):
+def exportar(db: Session = Depends(get_db)):
     paises = db.query(Pais).order_by(Pais.nombre).all()
 
     # Generar el archivo

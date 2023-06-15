@@ -8,7 +8,7 @@ from fastapi_cache.decorator import cache
 
 sys.path.append(".")
 
-
+# Modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Pais, PaisContinente, Continente
 from app.v1.schema.schemas import PaisLista
@@ -26,6 +26,7 @@ def buscar_paises(
     db: Session = Depends(get_db),
 ):
     print("Ejecutando la función buscar_paises")
+
     if pais or capital or continente:
         query = (
             db.query(Pais)

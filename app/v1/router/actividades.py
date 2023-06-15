@@ -7,6 +7,7 @@ from fastapi_cache.decorator import cache
 
 sys.path.append(".")
 
+# Modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Actividad
 from app.v1.schema.schemas import ActividadView
@@ -28,7 +29,7 @@ def get_actividades(db: Session = Depends(get_db)):
     for actividad in actividades:
         paises = [
             pais.nombre for pais in actividad.paises
-        ]  # Obtener los nombres de los países
+        ]  # Se obtiene una lista de los paises que tienen la actividad
         actividad_view = ActividadView(
             id=actividad.id,
             nombre=actividad.nombre,

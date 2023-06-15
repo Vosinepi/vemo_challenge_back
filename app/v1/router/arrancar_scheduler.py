@@ -1,13 +1,10 @@
 import sys
-from fastapi import Depends, APIRouter, HTTPException
-
-from sqlalchemy.orm import Session
+from fastapi import APIRouter
 
 sys.path.append(".")
 
-from app.v1.utils.db import Base, engine, get_db, SessionLocal
+# modulos propios
 from app.v1.model.models import *
-from app.v1.schema.schemas import PaisDetalle
 from app.v1.scripts.schedule_mail_ddbb import scheduler_mail_ddbb as scheduler
 
 router = APIRouter(prefix="/api/v1/schedulerstart", tags=["scheduler"])
