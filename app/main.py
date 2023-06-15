@@ -24,7 +24,7 @@ from v1.router.delete_activity import router as delete_activity
 app = FastAPI(title="API Paises", version=0.1, root_path="/")
 
 
-@app.get("/api/v1")
+@app.get("/")
 def root():
     with open("./app/v1/utils/data.json") as file:
         data = json.load(file)
@@ -38,8 +38,8 @@ app.include_router(
 # app.include_router(paises)  # Listado de paises
 app.include_router(busqueda)  # Busqueda de paises por nombre o listar todo
 app.include_router(pais_detalle)  # Detalle de un pais
-app.include_router(actividades)  # Listado de actividades
 app.include_router(crear_actividades)  # Crear actividades
+app.include_router(actividades)  # Listado de actividades
 app.include_router(update_actividad)  # Actualizar actividades
 app.include_router(delete_activity)  # Eliminar actividades
 app.include_router(enviar_excel)  # Enviar excel por correo

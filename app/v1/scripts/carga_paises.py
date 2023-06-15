@@ -4,6 +4,11 @@ import logging
 
 sys.path.append(".")
 
+from fastapi_cache.backends.memcached import MemcachedBackend
+from fastapi_cache import FastAPICache
+from cachetools import TTLCache
+from datetime import timedelta
+
 # modulos propios
 from app.v1.utils.db import SessionLocal
 from app.v1.utils.logger import handler
@@ -19,6 +24,10 @@ from app.v1.model.models import (
 logger = logging.getLogger("Carga de datos")
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
+
+# crear nuevo cache
+cache = TTLCache(maxsize=1000, ttl=timedelta(minutes=5))
+backend = MemcachedBackend(cache)
 
 
 def cargar_datos():
@@ -140,6 +149,11 @@ def cargar_datos():
     db.commit()
     db.close()
     logger.info("Datos cargados y actulizacdos")
+
+    # Reseteo la capa de caché creando una nueva instancia de la misma
+    logger.info("Resetting cache...")
+    FastAPICache.init(backend, prefix="fastapi-cache")
+    logger.info("Cache reset complete.")
 
 
 if __name__ == "__main__":

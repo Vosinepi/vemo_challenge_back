@@ -3,12 +3,21 @@ from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
+from fastapi_cache.backends.memcached import MemcachedBackend
+from fastapi_cache import FastAPICache
+from cachetools import TTLCache
+from datetime import timedelta
+
 sys.path.append(".")
 
 # modulos propios
 from app.v1.utils.db import get_db
 from app.v1.model.models import Actividad, PaisActividad, Pais
 from app.v1.schema.schemas import ActividadUpdate
+
+# crear nuevo cache
+cache = TTLCache(maxsize=1000, ttl=timedelta(minutes=5))
+backend = MemcachedBackend(cache)
 
 router = APIRouter(prefix="/api/v1/actividades", tags=["actividades"])
 
@@ -68,4 +77,8 @@ def update_actividad(
         "descripcion": db_actividad.descripcion,
         "paises_con_actividad": listado_paises,
     }
+
+    # Reseteo la capa de caché creando una nueva instancia de la misma
+    FastAPICache.init(backend, prefix="fastapi-cache")
+
     return actividad_response

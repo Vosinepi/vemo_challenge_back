@@ -16,7 +16,7 @@ from v1.model.models import *
 
 # crear cache
 cache = TTLCache(maxsize=1000, ttl=timedelta(minutes=5))
-backend = MemcachedBackend("memcached")
+backend = MemcachedBackend(cache)
 
 router = APIRouter(tags=["Crear_Cargar"])
 

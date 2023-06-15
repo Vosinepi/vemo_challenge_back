@@ -71,9 +71,11 @@ main.py
 
 ## Endpoints
 
+http://localhost:8000/api/v1/docs
+
 ### Root
 
-- URL: `/api/v1/`
+- URL: `/`
 
 ### Mostrar todos los países
 
