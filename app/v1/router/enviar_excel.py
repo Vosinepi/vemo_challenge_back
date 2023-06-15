@@ -13,10 +13,13 @@ router = APIRouter(prefix="/api/v1/exportar", tags=["utilidades"])
 
 
 @router.get("/")
-def exportar(correo: str = None, db: Session = Depends(get_db)):
+def enviar_mail(correo: str = None, db: Session = Depends(get_db)):
     paises = db.query(Pais).order_by(Pais.nombre).all()
 
     archivo = generar_excel(paises)  # Genera el excel
-    enviar_correo(archivo, correo)  # Envia el correo
+    try:
+        enviar_correo(archivo, correo)
+    except Exception as e:
+        return {"mensaje": "Error al enviar el correo", "error": str(e)}
 
     return {"mensaje": "Correo enviado"}

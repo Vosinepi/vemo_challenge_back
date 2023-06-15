@@ -2,6 +2,6 @@
 *.pot
 *.pyc
 __pycache__/
-.env
+
 venv
 .vscode
